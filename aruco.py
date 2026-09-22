@@ -19,7 +19,7 @@ def get_hex_type(marker_id):
     return "unknown"
 
 # Initialize OpenCV ArUco detector (DICT_4X4_50 or DICT_6X6_250 are good options)
-dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_5X5_100)
+dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_ARUCO_ORIGINAL)
 parameters = cv2.aruco.DetectorParameters()
 detector = cv2.aruco.ArucoDetector(dictionary, parameters)
 
@@ -68,6 +68,8 @@ while cap.isOpened():
 
     # Clean output JSON representation of the current layout
     json_output = json.dumps({"hex_count": len(board_state), "hexes": board_state}, indent=2)
+
+    print(json_output)
 
     cv2.imshow("ArUco Catan Tracker", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
